@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
-Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::middleware(['guest'])->group(function () {
+    Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+    Route::get('/login', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
+});
 
-Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register']);
-Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+});
+
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+Route::get('/register', [\App\Http\Controllers\AuthController::class, 'showRegistrationForm'])->name('register');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
