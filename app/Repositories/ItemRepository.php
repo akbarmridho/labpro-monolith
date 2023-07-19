@@ -16,7 +16,7 @@ class ItemRepository implements ItemRepositoryInterface
         $this->baseUrl = env('SINGLE_BASE_URL', 'http://localhost:3000');
     }
 
-    public function getAllItem()
+    public function getAllItem(): ?\Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
         $response = Http::baseUrl($this->baseUrl)->get('barang');
 
@@ -27,7 +27,7 @@ class ItemRepository implements ItemRepositoryInterface
         return null;
     }
 
-    public function getItem(string $id)
+    public function getItem(string $id): ?array
     {
         $responseItem = Http::baseUrl($this->baseUrl)->get('barang/' . $id);
 
