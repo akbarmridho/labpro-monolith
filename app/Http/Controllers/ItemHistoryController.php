@@ -9,6 +9,11 @@ class ItemHistoryController extends Controller
 {
     public function index()
     {
-        $itemHistory = ItemHistory::paginate(10);
+        $user = auth()->user();
+        $itemHistory = ItemHistory::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('history', [
+            'histories' => $itemHistory
+        ]);
     }
 }

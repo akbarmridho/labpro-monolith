@@ -16,4 +16,13 @@ use Illuminate\Database\Eloquent\Model;
 class ItemHistory extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'item_name',
+        'price',
+        'quantity',
+        'item_company_name',
+        'item_id',
+        'user_id'
+    ];
 }

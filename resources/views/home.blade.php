@@ -6,7 +6,7 @@
             @foreach($items as $item)
                 <div class="col">
                     <div class="card h-100">
-                        <img src="https://placehold.co/600x400" class="card-img-top" alt="...">
+                        <img src="https://placehold.co/600x400" class="card-img-top" alt="item image">
                         <div class="card-body">
                             <h5 class="card-title">{{$item->resource['nama']}}</h5>
                             <p class="card-text">Rp{{$item->resource['harga']}}</p>

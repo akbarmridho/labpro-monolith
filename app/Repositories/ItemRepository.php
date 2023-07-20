@@ -62,11 +62,11 @@ class ItemRepository implements ItemRepositoryInterface
         $item = Item::make($responseItem->json('data'));
 
         $responseUpdate = Http::baseUrl($this->baseUrl)->put('barang/' . $id, [
-            'name' => $item->name,
-            'harga' => $item->harga,
-            'stok' => $item->stok - $amount,
-            'kode' => $item->kode,
-            'perusahaan_id' => $item->perusahaan_id
+            'nama' => $item->resource['nama'],
+            'harga' => $item->resource['harga'],
+            'stok' => $item->resource['stok'] - $amount,
+            'kode' => $item->resource['kode'],
+            'perusahaan_id' => $item->resource['perusahaan_id']
         ]);
 
         return $responseUpdate->ok();

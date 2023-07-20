@@ -31,6 +31,6 @@ Route::get('/items/{id}', [\App\Http\Controllers\ItemController::class, 'view'])
 Route::get('/items/{id}/purchase', [\App\Http\Controllers\ItemController::class, 'purchaseView'])->name('item.purchase');
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/items/{id}/purchase', [\App\Http\Controllers\ItemController::class, 'purchase']);
+    Route::post('/purchase', [\App\Http\Controllers\ItemController::class, 'purchase'])->name('purchase');
     Route::get('/item-history', [\App\Http\Controllers\ItemHistoryController::class, 'index'])->name('history');
 });
