@@ -15,12 +15,12 @@ class Item extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'harga' => $this->harga,
-            'stok' => $this->stok,
-            'kode' => $this->kode,
-            'perusahaan_id' => $this->perusahaan_id
+            'id' => $this->resource['id'],
+            'nama' => $this->resource['nama'],
+            'harga' => $this->resource['harga'],
+            'stok' => $this->resource['stok'],
+            'kode' => $this->resource['kode'],
+            'perusahaan_id' => $this->resource['perusahaan_id']
         ];
     }
 }

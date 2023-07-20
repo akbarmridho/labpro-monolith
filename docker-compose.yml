@@ -51,7 +51,7 @@ services:
             timeout: 5s
 networks:
     sail:
-        driver: bridge
+        driver: host
 volumes:
     sail-pgsql:
         driver: local

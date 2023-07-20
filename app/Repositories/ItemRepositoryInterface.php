@@ -2,9 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\ItemCollection;
+
 interface ItemRepositoryInterface
 {
-    public function getAllItem(): ?\Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+    public function getAllItem(): ?ItemCollection;
 
     public function getItem(string $id): ?array;
 

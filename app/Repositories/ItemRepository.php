@@ -16,12 +16,12 @@ class ItemRepository implements ItemRepositoryInterface
         $this->baseUrl = env('SINGLE_BASE_URL', 'http://localhost:3000');
     }
 
-    public function getAllItem(): ?\Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function getAllItem(): ?ItemCollection
     {
         $response = Http::baseUrl($this->baseUrl)->get('barang');
 
         if ($response->ok()) {
-            return ItemCollection::collection($response->json('data'));
+            return ItemCollection::make($response->json('data'));
         }
 
         return null;
@@ -37,7 +37,7 @@ class ItemRepository implements ItemRepositoryInterface
 
         $item = Item::make($responseItem->json('data'));
 
-        $responseCompany = Http::baseUrl($this->baseUrl)->get('perusahaan/' . $item->perusahaan_id);
+        $responseCompany = Http::baseUrl($this->baseUrl)->get('perusahaan/' . $item->resource['perusahaan_id']);
 
         if (!$responseCompany->ok()) {
             return null;

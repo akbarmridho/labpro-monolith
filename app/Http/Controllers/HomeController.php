@@ -37,6 +37,8 @@ class HomeController extends Controller
             $page
         );
 
-        return view('home');
+        return view('home', [
+            'items' => $paginator
+        ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -30,9 +31,7 @@ class AuthController extends Controller
             ]);
         }
 
-        cookie('token', $token, auth()->factory()->getTTL());
-
-        return redirect($this->home);
+        return redirect($this->home)->withCookie(cookie('token', $token, auth()->factory()->getTTL()));
     }
 
     /**
@@ -61,7 +60,7 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        \Cookie::queue([\Cookie::forget('token')]);
+        Cookie::queue(Cookie::forget('token'));
         return redirect($this->home);
     }
 

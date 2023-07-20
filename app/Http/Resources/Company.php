@@ -15,11 +15,11 @@ class Company extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'nama' => $this->nama,
-            'alamat' => $this->alamat,
-            'no_telp' => $this->no_telp,
-            'kode' => $this->kode
+            'id' => $this->resource['id'],
+            'nama' => $this->resource['nama'],
+            'alamat' => $this->resource['alamat'],
+            'no_telp' => $this->resource['no_telp'],
+            'kode' => $this->resource['kode']
         ];
     }
 }

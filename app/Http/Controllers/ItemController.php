@@ -21,6 +21,8 @@ class ItemController extends Controller
         if ($detail === null) {
             throw new NotFoundHttpException('Item not found');
         }
+
+        return $detail;
     }
 
     public function purchaseView(Request $request, string $id)
