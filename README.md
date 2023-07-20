@@ -1,85 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center"> Labpro Monolith Service </h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p align="center">Author: Akbar Maulana Ridho (13521093)</p>
 
-## About Laravel
+## Languages, Libraries and Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and
-creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in
-many web projects, such as:
+- PHP 8
+- Laravel 10
+- Bootstrap 5
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache)
-  storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Setup
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+$ cp .env.example .env
+```
 
-## A
+```bash
+$ composer install
+```
 
-`./vendor/bin/sail up`
+```bash
+$ ./vendor/bin/sail up
+```
 
-`./vendor/bin/sail artisan migrate`
+```bash
+$ ./vendor/bin/sail artisan migrate
+```
 
-`php artisan jwt:secret`
+```bash
+$ ./vendor/bin/sail artisan key:generate
+```
 
-## Learning Laravel
+```bash
+$ ./vendor/bin/sail artisan jwt:secret
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all
-modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+$ npm install
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a
-modern Laravel application from scratch.
+Change `SINGLE_BASE_URL=` in env file with the single service url
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video
-tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging
-into our comprehensive video library.
+## Running The App
 
-## Laravel Sponsors
+```bash
+$ ./vendor/bin/sail up
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in
-becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+$ npm run dev
+```
 
-### Premium Partners
+Open at `http://localhost`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Design Pattern
 
-## Contributing
+### Repository Pattern
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in
-the [Laravel documentation](https://laravel.com/docs/contributions).
+Perhatikan bahwa sumber data pada service ini tidak hanya pada database saja, tetapi juga menggunakan data pada service
+lain. Oleh karena itu, kita bisa memisahkan logic dan melakukan abstraksi untuk melakukan query pada service luar
+tersebut dengan menggunakan
+repository pattern.
 
-## Code of Conduct
+### Dependency Injection
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by
-the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Digunakan agar project ini bisa terpisah-pisah menjadi modul yang mudah dibongkar pasang dan mempermudah pengaturan
+dependency suatu kelas. Selain itu, kelas yang membutuhkan suatu dependency tidak perlu pusing untuk memikirkan
+bagaimana cara membuat dan mengatur lifecycle kelas tersebut.
 
-## Security Vulnerabilities
+### Model View Controller
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell
-via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Design pattern ini merupakan salah satu design pattern bawaan Laravel, yang memisahkan kode menjadi tiga bagian yang
+terdiri dari model, view, dan controller. Model bertugas untuk menyiapkan, mengatur, dan memanipulasi dan
+mengorganisasikan data yang ada di database. View bertugas untuk menampilkan informasi dalam bentuk GUI. Controller
+bertugas untuk menghubungkan serta mengatur model dan view agar dapat saling terhubung.
 
-## License
+Design pattern ini dipilih karena merupakan design pattern yang umum dalam service monolith seperti ini dan memudahkan
+pemisahan logic antara model-view-controller. Setiap controlller terdapat pada folder app/Http/Controller, setiap model
+terdapat pada folder app/Models dan app/Http/Resources, dan template view terdapat pada folder resources/view.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Endpoint
+
+- `/login` GET request, untuk menampilkan form login
+- `/login` POST request, untuk melakukan aksi login
+- `/register` GET request, untuk menampilkan form registrasi
+- `/register` POST request, untuk melakukan aksi registrasi
+- `/logout` POST request, untuk melakukan aksi logout
+- `/` GET request, untk menampilkan homepage yang berisi daftar item yang bisa dibeli
+- `/items/{id}` GET request, untuk menampilkan detail suatu barang
+- `/items/{id}/purchase` GET request, untuk menampilkan halaman checkout barang tersebut
+- `/purchase` POST request, untuk melakukan pembelian suatu barang
+- `/item-history` GET request, untuk menampilkan daftar pembelian yang pernah dilakukan oleh pengguna yang sedang login.
+
+## Bonus
+
+### Responsive layout
+
+Banyaknya card pada home dan history page tiap rownya akan mengikuti lebar tampilan sehingga bisa dibilang responsive.
+
+### SOLID
+
+Cukup jelas bila memperhatikan folder structure dan isi kodenya.
